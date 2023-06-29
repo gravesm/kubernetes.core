@@ -573,7 +573,7 @@ def load_values_files(values_files):
     return values
 
 
-def get_plugin_version(plugin):
+def get_plugin_version(module, plugin):
     """
     Check if helm plugin is installed and return corresponding version
     """
@@ -688,7 +688,6 @@ def argument_spec():
 
 
 def main():
-    global module
     module = AnsibleHelmModule(
         argument_spec=argument_spec(),
         required_if=[
@@ -828,7 +827,7 @@ def main():
 
         else:
 
-            helm_diff_version = get_plugin_version("diff")
+            helm_diff_version = get_plugin_version(module, "diff")
             if helm_diff_version and (
                 not chart_repo_url
                 or (
